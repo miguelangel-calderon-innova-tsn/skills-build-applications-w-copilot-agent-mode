@@ -14,9 +14,12 @@ export function collectionFromResponse(payload) {
   return []
 }
 
-export async function fetchCollection(resource) {
-  const response = await fetch(`${apiBaseUrl}/${resource}/`)
-  if (!response.ok) throw new Error(`Unable to load ${resource} (${response.status})`)
+export async function fetchCollection(resourceOrUrl) {
+  const endpoint = resourceOrUrl.startsWith('http')
+    ? resourceOrUrl
+    : `${apiBaseUrl}/${resourceOrUrl}/`
+  const response = await fetch(endpoint)
+  if (!response.ok) throw new Error(`Unable to load ${endpoint} (${response.status})`)
   return collectionFromResponse(await response.json())
 }
 
