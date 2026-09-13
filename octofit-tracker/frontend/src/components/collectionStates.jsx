@@ -1,0 +1,2 @@
+export function LoadingState() { return <div className="empty-state">Loading live data...</div> }
+export function ErrorState({ message }) { return <div className="empty-state empty-state--error">{message}</div> }
